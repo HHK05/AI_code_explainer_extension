@@ -1,0 +1,68 @@
+{
+  "name": "ai-code-explainer",
+  "displayName": "AI Code Explainer",
+  "description": "Explains selected code using AI",
+  "version": "0.0.1",
+  "publisher": "Harshil HK Product lead @ Evolune",
+  "engines": {
+    "vscode": "^1.70.0"
+  },
+  "categories": ["Other"],
+  "keywords": ["ai", "code", "explanation", "gemini", "assistant"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ai-code-explainer.explainCode",
+        "title": "🤖 Explain Code with AI"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection",
+          "command": "ai-code-explainer.explainCode",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI Code Explainer",
+      "properties": {
+        "aiCodeExplainer.geminiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Google Gemini API key from AI Studio (https://aistudio.google.com)",
+          "scope": "application"
+        },
+        "aiCodeExplainer.maxTokens": {
+          "type": "number",
+          "default": 1000,
+          "description": "Maximum number of tokens in AI response",
+          "minimum": 100,
+          "maximum": 2000,
+          "scope": "application"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.70.0",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "axios": "^1.4.0"
+  }
+}
